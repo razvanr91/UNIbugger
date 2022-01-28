@@ -12,7 +12,7 @@ namespace UNIbugger.Models
         public Guid Id { get; set; }
 
         [DisplayName("Company")]
-        public string? CompanyId { get; set; }
+        public Guid? CompanyId { get; set; }
 
         [Required]
         [StringLength(50)]
