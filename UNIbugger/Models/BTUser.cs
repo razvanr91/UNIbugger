@@ -33,7 +33,7 @@ namespace UNIbugger.Models
         [Display(Name = "File Extension")]
         public string AvatarContentType { get; set; }
 
-        public Guid? CompanyId { get; set; }
+        public string? CompanyId { get; set; }
 
         // Navigation Properties
 

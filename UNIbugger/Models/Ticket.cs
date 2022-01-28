@@ -31,16 +31,16 @@ namespace UNIbugger.Models
         public bool Archived { get; set; }
 
         [DisplayName("Project")]
-        public Guid ProjectId { get; set; }
+        public string ProjectId { get; set; }
 
         [DisplayName("Ticket Type")]
-        public Guid TicketTypeId { get; set; }
+        public string TicketTypeId { get; set; }
 
         [DisplayName("Ticket Priority")]
-        public Guid TicketPriorityId { get; set; }
+        public string TicketPriorityId { get; set; }
 
         [DisplayName("Ticket Status")]
-        public Guid TicketStatusId { get; set; }
+        public string TicketStatusId { get; set; }
 
         [DisplayName("Ticket Owner")]
         public string OwnerUserId { get; set; }

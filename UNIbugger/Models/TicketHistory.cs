@@ -8,7 +8,7 @@ namespace UNIbugger.Models
         public Guid Id { get; set; }
 
         [DisplayName("Ticket")]
-        public Guid TicketId { get; set; }
+        public string TicketId { get; set; }
 
         [DisplayName("Updated Item")]
         public string Property { get; set; }

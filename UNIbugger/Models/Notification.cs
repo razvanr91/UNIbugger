@@ -9,7 +9,7 @@ namespace UNIbugger.Models
         public Guid Id { get; set; }
 
         [DisplayName("Ticket")]
-        public Guid TicketId { get; set; }
+        public string TicketId { get; set; }
 
         [Required]
         [DisplayName("Title")]
@@ -25,11 +25,11 @@ namespace UNIbugger.Models
 
         [Required]
         [DisplayName("Recipient")]
-        public Guid RecipientId { get; set; }
+        public string RecipientId { get; set; }
 
         [Required]
         [DisplayName("Sender")]
-        public Guid SenderId { get; set; }
+        public string SenderId { get; set; }
 
         [DisplayName("Has been viewed")]
         public bool Viewed { get; set; }

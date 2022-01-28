@@ -29,7 +29,7 @@ namespace UNIbugger.Models
         public DateTimeOffset EndDate { get; set; }
 
         [DisplayName("Priority")]
-        public Guid? ProjectPriorityId { get; set; }
+        public string? ProjectPriorityId { get; set; }
 
         [NotMapped]
         [DataType(DataType.Upload)]

@@ -14,7 +14,7 @@ namespace UNIbugger.Models
         public DateTimeOffset Created { get; set; }
 
         [DisplayName("Ticket")]
-        public Guid TicketId { get; set; }
+        public string TicketId { get; set; }
 
         [DisplayName("Team Member")]
         public string UserId { get; set; }

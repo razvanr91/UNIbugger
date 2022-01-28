@@ -15,19 +15,19 @@ namespace UNIbugger.Models
         public DateTimeOffset JoinDate { get; set; }
 
         [DisplayName("Code")]
-        public Guid CompanyToken { get; set; }
+        public string CompanyToken { get; set; }
 
         [DisplayName("Company")]
-        public Guid CompanyId { get; set; }
+        public string CompanyId { get; set; }
 
         [DisplayName("Project")]
-        public Guid ProjectId { get; set; }
+        public string ProjectId { get; set; }
 
         [DisplayName("Invitor")]
-        public Guid InvitorId { get; set; }
+        public string InvitorId { get; set; }
 
         [DisplayName("Invitee")]
-        public Guid InviteeId { get; set; }
+        public string InviteeId { get; set; }
 
         [DataType(DataType.EmailAddress)]
         [DisplayName("Invitee Email")]

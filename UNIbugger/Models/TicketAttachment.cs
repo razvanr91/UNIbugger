@@ -11,7 +11,7 @@ namespace UNIbugger.Models
         public Guid Id { get; set; }
 
         [DisplayName("Ticket")]
-        public Guid TicketId { get; set; }
+        public string TicketId { get; set; }
 
         [DisplayName("File Date")]
         public DateTimeOffset Created { get; set; }
