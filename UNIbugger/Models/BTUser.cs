@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,5 +20,25 @@ namespace UNIbugger.Models
 
         [NotMapped]
         public string FullName { get { return $"{FirstName} {LastName}"; } }
+
+        [NotMapped]
+        [DataType(DataType.Upload)]
+        public IFormFile Avatar { get; set; }
+
+        [DisplayName("Avatar")]
+        public string AvatarFileName { get; set; }
+
+        public byte[] FileData { get; set; }
+
+        [Display(Name = "File Extension")]
+        public string AvatarContentType { get; set; }
+
+        public Guid? CompanyId { get; set; }
+
+        // Navigation Properties
+
+        public virtual Company Company { get; set; }
+
+        public virtual ICollection<Project> Projects { get; set; } = new HashSet<Project>();
     }
 }
