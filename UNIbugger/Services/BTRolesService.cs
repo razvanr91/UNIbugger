@@ -20,9 +20,12 @@ namespace UNIbugger.Services
             _userManager = userManager;
         }
 
-        public Task<bool> AddUserToRoleAsync(BTUser user, string role)
+        public async Task<bool> AddUserToRoleAsync(BTUser user, string role)
         {
-            throw new System.NotImplementedException();
+            bool result = (await _userManager.AddToRoleAsync(user, role)).Succeeded;
+
+            return result;
+            
         }
 
         public Task<string> GetRoleNameByIdAsync(string roleId)
