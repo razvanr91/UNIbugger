@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UNIbugger.Data;
 using UNIbugger.Models;
+using UNIbugger.Services;
+using UNIbugger.Services.Interfaces;
 
 namespace UNIbugger
 {
@@ -31,6 +33,8 @@ namespace UNIbugger
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultUI()
                     .AddDefaultTokenProviders();
+
+            services.AddScoped<IBTRolesService, BTRolesService>();
 
             services.AddControllersWithViews();
         }
