@@ -52,9 +52,9 @@ namespace UNIbugger.Services
                         await _context.SaveChangesAsync();
                         return true;
                     }
-                    catch(Exception ex)
+                    catch (Exception)
                     {
-                        throw ex;
+                        throw;
                     }
                 }
                 return false;
