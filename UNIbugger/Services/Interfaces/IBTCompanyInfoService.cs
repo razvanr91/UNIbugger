@@ -13,5 +13,6 @@ namespace UNIbugger.Services.Interfaces
         public Task<List<Project>> GetAllProjectsAsync(string? companyId);
 
         public Task<List<Ticket>> GetAllTicketsAsync(string? companyId);
+
     }
 }
