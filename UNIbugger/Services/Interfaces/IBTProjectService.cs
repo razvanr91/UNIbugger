@@ -36,7 +36,7 @@ namespace UNIbugger.Services.Interfaces
 
         public Task<List<Project>> GetUserProjectAsync(string userId);
 
-        public Task<bool> IsUserOnProject(string userId, string projectId);
+        public Task<bool> IsUserOnProjectAsync(string userId, string projectId);
 
         public Task<string> LookupProjectPriorityId(string priorityName);
 
