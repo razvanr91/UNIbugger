@@ -34,7 +34,7 @@ namespace UNIbugger.Services.Interfaces
 
         public Task<List<BTUser>> GetUsersNotOnProjectAsync(string projectId, string companyId);
 
-        public Task<List<Project>> GetUserProjectAsync(string userId);
+        public Task<List<Project>> GetUserProjectsAsync(string userId);
 
         public Task<bool> IsUserOnProjectAsync(string userId, string projectId);
 
