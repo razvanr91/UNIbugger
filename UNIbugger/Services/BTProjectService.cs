@@ -14,15 +14,11 @@ namespace UNIbugger.Services
     public class BTProjectService : IBTProjectService
     {
         private readonly ApplicationDbContext _context;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly UserManager<BTUser> _userManager;
         private readonly IBTRolesService _roleService;
 
-        public BTProjectService(ApplicationDbContext context, RoleManager<IdentityRole> roleManager, UserManager<BTUser> userManager, IBTRolesService roleService )
+        public BTProjectService(ApplicationDbContext context, IBTRolesService roleService )
         {
             _context = context;
-            _roleManager = roleManager;
-            _userManager = userManager;
             _roleService = roleService;
         }
 
