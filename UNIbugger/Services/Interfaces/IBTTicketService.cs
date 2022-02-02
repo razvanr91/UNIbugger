@@ -11,7 +11,7 @@ namespace UNIbugger.Services.Interfaces
         
         public Task UpdateTicketAsync(Ticket ticket);
 
-        public Task<Ticket> GetTicketByIdAsync(string id);
+        public Task<Ticket> GetTicketByIdAsync(string ticketId);
 
         public Task ArchiveTicketAsync(Ticket ticket);
 
