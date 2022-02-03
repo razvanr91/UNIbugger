@@ -24,7 +24,7 @@ namespace UNIbugger.Services.Interfaces
 
         public Task<List<Ticket>> GetAllTicketsByPriorityAsync(string companyId, string priorityName);
 
-        public Task<List<Ticket>> GetAllTicketsByStatusAsync(string copmanyId, string statusName);
+        public Task<List<Ticket>> GetAllTicketsByStatusAsync(string companyId, string statusName);
 
         public Task<List<Ticket>> GetAllTicketsByTypeAsync(string companyId, string typeName);
 
