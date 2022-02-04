@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UNIbugger.Data;
 using UNIbugger.Models;
+using UNIbugger.Models.Enums;
 using UNIbugger.Services.Interfaces;
 
 namespace UNIbugger.Services
@@ -12,10 +13,14 @@ namespace UNIbugger.Services
     public class BTTIcketService : IBTTicketService
     {
         private readonly ApplicationDbContext _context;
+        private readonly IBTRolesService _rolesService;
+        private readonly IBTProjectService _projectService;
 
-        public BTTIcketService(ApplicationDbContext context)
+        public BTTIcketService(ApplicationDbContext context, IBTRolesService rolesService, IBTProjectService projectService)
         {
             _context = context;
+            _rolesService = rolesService;
+            _projectService = projectService;
         }
 
         public async Task AddNewTicketAsync(Ticket ticket)
@@ -173,14 +178,70 @@ namespace UNIbugger.Services
             throw new System.NotImplementedException();
         }
 
-        public Task<List<Ticket>> GetTicketsByRoleAsync(string role, string userId, string companyId)
+        public async Task<List<Ticket>> GetTicketsByRoleAsync(string role, string userId, string companyId)
         {
-            throw new System.NotImplementedException();
+            List<Ticket> tickets = new();
+
+            try
+            {
+                if(role == Roles.Admin.ToString())
+                {
+                    tickets = await GetAllTicketsByCompanyAsync(companyId);
+                } 
+                else if(role == Roles.Developer.ToString())
+                {
+                    tickets = (await GetAllTicketsByCompanyAsync(companyId)).Where(ticket => ticket.DeveloperUserId == userId).ToList();
+                } 
+                else if(role == Roles.Submitter.ToString())
+                {
+                    tickets = (await GetAllTicketsByCompanyAsync(companyId)).Where(ticket => ticket.OwnerUserId == userId).ToList();
+                } 
+                else if(role == Roles.ProjectManager.ToString())
+                {
+                    tickets = await GetTicketsByUserIdAsync(userId, companyId);
+                }
+
+                return tickets;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public Task<List<Ticket>> GetTicketsByUserIdAsync(string userId, string companyId)
+        public async Task<List<Ticket>> GetTicketsByUserIdAsync(string userId, string companyId)
         {
-            throw new System.NotImplementedException();
+            BTUser user = await _context.Users.FirstOrDefaultAsync(user => user.Id == userId);
+            List<Ticket> tickets = new();
+            try
+            {
+                if(await _rolesService.IsUserInRoleAsync(user, Roles.Admin.ToString()))
+                {
+                    tickets = (await _projectService.GetAllProjectsByCompany(companyId)).SelectMany(project => project.Tickets).ToList();
+                }
+                else if(await _rolesService.IsUserInRoleAsync(user, Roles.Developer.ToString()))
+                {
+                    tickets = (await _projectService.GetAllProjectsByCompany(companyId)).SelectMany(project => project.Tickets)
+                                                    .Where(ticket => ticket.DeveloperUserId == userId).ToList();
+                }
+                else if(await _rolesService.IsUserInRoleAsync(user, Roles.Submitter.ToString()))
+                {
+                    tickets = (await _projectService.GetAllProjectsByCompany(companyId)).SelectMany(project => project.Tickets)
+                                                    .Where(ticket => ticket.OwnerUserId == userId).ToList();
+                }
+                else if(await _rolesService.IsUserInRoleAsync(user, Roles.ProjectManager.ToString()))
+                {
+                    tickets = (await _projectService.GetUserProjectsAsync(userId)).SelectMany(project => project.Tickets).ToList();
+                }
+
+                return tickets;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public async Task<string?> LookupTicketPriorityIdAsync(string priorityName)
